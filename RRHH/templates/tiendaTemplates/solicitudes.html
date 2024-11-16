@@ -1,0 +1,108 @@
+{% extends 'tiendaTemplates/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container">
+    <h1>Solicitudes de Vacaciones o Descanso</h1>
+
+    <!-- Formulario de búsqueda -->
+    <div class="search-bar">
+        <form method="get">
+            <input type="text" id="employeeId" name="employeeId" placeholder="Buscar por ID de empleado">
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+    </div>
+
+    <!-- Tabla de solicitudes de vacaciones o descanso -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID de Empleado</th>
+                <th>Nombre</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="vacationTable">
+            {% for solicitud in solicitudes %}
+            <tr>
+                <td>{{ solicitud.codigoEmpleado }}</td>
+                <td>{{ solicitud.nombre }}</td>
+                <td>{{ solicitud.fecha_inicio }}</td>
+                <td>{{ solicitud.fecha_fin }}</td>
+                <td>{{ solicitud.estado|default:"Pendiente" }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="action" value="aprobar_{{ solicitud.codigoEmpleado }}" class="btn">Aprobar</button>
+                        <button type="submit" name="action" value="rechazar_{{ solicitud.codigoEmpleado }}" class="btn btn-warning">Rechazar</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No se encontraron solicitudes.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Estilos adicionales -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .btn {
+        padding: 8px 16px;
+        margin-top: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #45a049;
+    }
+    .btn-warning {
+        background-color: #f39c12;
+    }
+    .btn-warning:hover {
+        background-color: #e67e22;
+    }
+    .search-bar {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}

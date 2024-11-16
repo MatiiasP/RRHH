@@ -1,0 +1,38 @@
+{% extends 'tiendaTemplates/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container">
+    <h1>Candidatos </h1>
+    <a href="{% url 'reclutamiento' %}" class="btn btn-secondary mb-3">Volver</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID de Candidato</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+                <th>Posición Solicitada</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidato in candidatos %}
+            <tr>
+                <td>{{ candidato.id }}</td>
+                <td>{{ candidato.nombre }}</td>
+                <td>{{ candidato.email }}</td>
+                <td>{{ candidato.telefono }}</td>
+                <td>{{ candidato.posicion_solicitada }}</td>
+                <td>{{ candidato.estado }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No hay candidatos.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

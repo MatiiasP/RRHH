@@ -1,0 +1,28 @@
+{% extends 'tiendaTemplates/base.html' %}
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-10 offset-1">
+        <h3>Confirmar eliminación de empleado</h3>
+        <div class="alert alert-danger h5">
+            ¿Está seguro que desea eliminar al empleado {{empleado.nombre}}
+            {{empleado.paterno}} {{empleado.materno}}?
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'empleados' %}" class="btn btn-dark">Cancelar</a>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" type="submit">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

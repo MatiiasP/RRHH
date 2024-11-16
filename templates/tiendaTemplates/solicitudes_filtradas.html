@@ -1,0 +1,44 @@
+{% extends 'tiendaTemplates/base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Solicitudes {{ estado }}</h1>
+
+    <!-- Enlace para volver a la lista completa de solicitudes -->
+    <div class="text-center mb-4">
+        <a href="{% url 'solicitudes' %}" class="btn btn-secondary">Volver a la Lista de Solicitudes</a>
+    </div>
+
+    <!-- Tabla de solicitudes filtradas por estado -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID de Empleado</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Tipo de Solicitud</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes %}
+                <tr>
+                    <td>{{ solicitud.codigoEmpleado }}</td>
+                    <td>{{ solicitud.nombre }}</td>
+                    <td>{{ solicitud.fecha_inicio }}</td>
+                    <td>{{ solicitud.fecha_fin }}</td>
+                    <td>{{ solicitud.tipo }}</td>
+                    <td>{{ solicitud.estado }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay solicitudes {{ estado }}.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

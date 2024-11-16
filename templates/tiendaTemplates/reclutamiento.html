@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% extends 'tiendaTemplates/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Reclutamiento</h1>
+
+    <!-- Formulario para agregar un nuevo candidato -->
+    <h3>Agregar Nuevo Candidato</h3>
+    <form method="post" enctype="multipart/form-data" class="mb-5">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="col-md-4">
+                <input type="email" name="email" class="form-control" placeholder="Correo Electrónico" required>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <input type="text" name="posicion_solicitada" class="form-control" placeholder="Posición Solicitada" required>
+            </div>
+            <div class="col-md-6">
+                <input type="file" name="curriculum" class="form-control" accept=".pdf,.doc,.docx">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Agregar Candidato</button>
+    </form>
+    <a href="{% url 'mostrar_candidatos' 'Aprobado' %}" class="btn btn-success mb-3">Mostrar Candidatos Aprobados</a>
+    <a href="{% url 'mostrar_candidatos' 'Rechazado' %}" class="btn btn-danger mb-3">Mostrar Candidatos Rechazados</a>
+
+
+
+    <!-- Tabla de candidatos -->
+    <h3>Lista de Candidatos</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID de Candidato</th>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Posición Solicitada</th>
+                    <th>Estado</th>
+                    <th>Currículum</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="recruitmentTable">
+                {% for candidato in candidatos %}
+                <tr>
+                    <td>{{ candidato.id }}</td>
+                    <td>{{ candidato.nombre }}</td>
+                    <td>{{ candidato.email }}</td>
+                    <td>{{ candidato.telefono }}</td>
+                    <td>{{ candidato.posicion_solicitada }}</td>
+                    <td>{{ candidato.estado }}</td>
+                    <td>
+                        {% if candidato.curriculum %}
+                            <a href="{{ candidato.curriculum.url }}" target="_blank">Ver Currículum</a>
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" name="action" value="aprobar_{{ candidato.id }}" class="btn">Aprobar</button>
+                            <button type="submit" name="action" value="rechazar_{{ candidato.id }}" class="btn btn-warning">Rechazar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">No se encontraron candidatos.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends 'tiendaTemplates/base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <!-- Encabezado principal -->
+    <div class="row">
+        <div class="col text-center">
+            <h1>Bienvenido a Empresa DE RR.HH.</h1>
+            <p class="lead">Soluciones eficientes para la gestión de empleados y reclutamiento de talento.</p>
+            <a href="{% url 'empleados' %}" class="btn btn-primary">Ir a Gestionar Empleados</a>
+        </div>
+    </div>
+
+    <!-- Sección de Información de la Empresa -->
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <h3>Nuestra Misión</h3>
+            <p>Ayudamos a las empresas a gestionar su talento de manera efectiva, promoviendo un ambiente laboral saludable y enfocado en el desarrollo profesional.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Nuestros Servicios</h3>
+            <ul>
+                <li>Gestión de empleados</li>
+                <li>Reclutamiento y selección de personal</li>
+                <li>Control de asistencia</li>
+                <li>Capacitación y desarrollo</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Valores</h3>
+            <p>Compromiso, transparencia e innovación en todos nuestros procesos de Recursos Humanos.</p>
+        </div>
+    </div>
+
+    <!-- Sección de Estadísticas -->
+    <div class="row text-center my-5">
+        <div class="col-md-3">
+            <h2>500+</h2>
+            <p>Empleados gestionados</p>
+        </div>
+        <div class="col-md-3">
+            <h2>120+</h2>
+            <p>Clientes satisfechos</p>
+        </div>
+        <div class="col-md-3">
+            <h2>10 Años</h2>
+            <p>Experiencia en RR.HH.</p>
+        </div>
+        <div class="col-md-3">
+            <h2>95%</h2>
+            <p>Tasa de retención de clientes</p>
+        </div>
+    </div>
+
+    <!-- Sección de Testimonios -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <h3>Testimonios</h3>
+            <p class="lead">Lo que dicen nuestros clientes</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <blockquote class="blockquote">
+                <p>"Empresa DE RR.HH. ha transformado la forma en que gestionamos nuestro equipo. Excelente servicio."</p>
+                <footer class="blockquote-footer">Gerente General, Empresa ABC</footer>
+            </blockquote>
+        </div>
+        <div class="col-md-4">
+            <blockquote class="blockquote">
+                <p>"El sistema de reclutamiento es rápido y fácil de usar. Reclutamos a los mejores candidatos."</p>
+                <footer class="blockquote-footer">Jefe de RR.HH., Compañía XYZ</footer>
+            </blockquote>
+        </div>
+        <div class="col-md-4">
+            <blockquote class="blockquote">
+                <p>"Muy satisfechos con el control de asistencia y la gestión de empleados. Recomendado."</p>
+                <footer class="blockquote-footer">CEO, Startup 123</footer>
+            </blockquote>
+        </div>
+    </div>
+
+    <!-- Sección de Llamado a la Acción -->
+    <div class="row text-center mt-5">
+        <div class="col">
+            <h3>¿Interesado en nuestros servicios?</h3>
+            <p>Contáctanos y descubre cómo podemos ayudarte a mejorar la gestión de tu equipo.</p>
+            <a href="#" class="btn btn-success">Contáctanos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

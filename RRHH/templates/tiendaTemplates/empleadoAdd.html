@@ -1,0 +1,91 @@
+{% extends 'tiendaTemplates/base.html' %}
+
+{% block contenido %}
+{% load static %}
+        <div class="row mt-5">
+            <div class="col-10 offset-1">
+                <h2>Empleados</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="row">
+                                {{ form.non_field_errors }}
+                                <div class="col-3 mb-3">
+                                    {{ form.run.label_tag}}
+                                    {{ form.run}}
+                                    {{ form.run.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    {{form.nombre.label_tag}}
+                                    {{form.nombre}}
+                                    {{form.nombre.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="id_materno">Apellido Paterno</label>
+                                    {{form.paterno}}
+                                    {{form.paterno.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="id_materno">Apellido Materno</label>
+                                    {{form.materno}}
+                                    {{form.materno.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    {{form.sexo.label_tag}}
+                                    {{form.sexo}}
+                                    {{form.sexo.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="id_codigoEmpleado">Código Empleado</label>
+                                    {{form.codigoEmpleado}}
+                                    {{form.codigoEmpleado.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    {{form.sueldo.label_tag}}
+                                    {{form.sueldo}}
+                                    {{form.sueldo.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="id_fechaNac">Fecha de Nacimiento</label>
+                                    {{form.fechaNac}}
+                                    {{form.fechaNac.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    {{form.cargo.label_tag}}
+                                    {{form.cargo}}
+                                    {{form.cargo.errors}}
+                                </div>
+                                <div class="col-3 mb-3">
+                                    {{form.departamento.label_tag}}
+                                    {{form.departamento}}
+                                    {{form.departamento.errors}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="{% static 'images/empleado.png' %}" alt="imagen usuario"
+                                    width="200" height="auto" class="mx-auto my-auto d-block">
+                                    <label for="foto">Fotografía del empleado</label>
+                                    <input type="file" name="foto" id="foto" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'inicio' %}" class="btn btn-dark">Ir a inicio</a>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+        {% endblock %}

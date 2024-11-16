@@ -1,0 +1,124 @@
+{% extends 'tiendaTemplates/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Solicitudes de Vacaciones o Licencia Médica</h1>
+
+    {% if messages %}
+        <div class="alert alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Formulario para registrar una nueva solicitud -->
+    <h3>Registrar Nueva Solicitud</h3>
+    <form method="post" action="{% url 'registrar_solicitud' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.codigo_empleado }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+            <div class="col-md-4">
+                {{ form.nombre }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+            <div class="col-md-4">
+                {{ form.tipo }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <label for="fecha_inicio">Fecha de Inicio</label>
+                {{ form.fecha_inicio }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+            <div class="col-md-6">
+                <label for="fecha_fin">Fecha de Fin</label>
+                {{ form.fecha_fin }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label for="archivo">Adjuntar Archivo</label>
+                {{ form.archivo }} <!-- Asegúrate de que el nombre del campo sea correcto -->
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Registrar Solicitud</button>
+    </form>
+
+    <!-- Botones para mostrar solicitudes aprobadas y rechazadas -->
+    <div class="mb-3">
+        <a href="{% url 'mostrar_solicitudes' 'Aprobado' %}" class="btn btn-success mb-3">Mostrar Solicitudes Aprobados</a>
+        <a href="{% url 'mostrar_solicitudes' 'Rechazado' %}" class="btn btn-danger mb-3">Mostrar Solicitudes Rechazados</a>
+    </div>
+
+    <!-- Tabla de solicitudes -->
+    <h3 class="mb-3">Lista de Solicitudes</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID de Empleado</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Tipo de Solicitud</th>
+                    <th>Estado</th>
+                    <th>Archivo Adjuntado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes %}
+                <tr>
+                    <td>{{ solicitud.codigoEmpleado }}</td>
+                    <td>{{ solicitud.nombre }}</td>
+                    <td>{{ solicitud.fecha_inicio }}</td>
+                    <td>{{ solicitud.fecha_fin }}</td>
+                    <td>{{ solicitud.tipo }}</td>
+                    <td>{{ solicitud.estado }}</td>
+                    <td>
+                        {% if solicitud.archivo %}
+                            <a href="{{ solicitud.archivo.url }}" target="_blank">Ver Archivo</a>
+                        {% else %}
+                            Sin archivo
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'aprobar_solicitud' solicitud.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm">Aprobar</button>
+                        </form>
+                        <form action="{% url 'rechazar_solicitud' solicitud.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">No se encontraron solicitudes.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

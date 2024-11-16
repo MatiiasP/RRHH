@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+h2, h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form button, form a {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+.btn-dark, .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+
+.table {
+    background-color: #343a40;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #495057;
+    color: #fff;
+    text-align: center;
+}
+
+.table tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #6c757d;
+}
+
+.table img {
+    border-radius: 50%;
+}
+
+
+img {
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d-block {
+    display: block;
+}
+
+
+.navbar {
+    background-color: #e3f2fd;
+}
+
+.navbar-brand, .nav-link {
+    color: #007bff;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #0056b3;
+}
+
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+footer script {
+    display: none;
+}

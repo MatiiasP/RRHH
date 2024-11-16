@@ -1,0 +1,56 @@
+{% extends 'tiendaTemplates/base.html' %}
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="row">
+            <div class="col-9">
+                <h2>Listado de empleados</h2>
+            </div>
+            <div class="col-3">
+                <a href="{% url 'crearEmpleados' %}" class="btn btn-success btn-sm">Agregar empleado</a>
+            </div>
+        </div>
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Código</th>
+                    <th>RUN</th>
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>Departamento</th>
+                    <th>Sueldo</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ empleado.codigoEmpleado }}</td>
+                    <td>{{ empleado.run }}</td>
+                    <td>{{ empleado.nombre }} {{ empleado.paterno }} {{ empleado.materno }}</td>
+                    <td>{{ empleado.cargo }}</td>
+                    <td>{{ empleado.departamento }}</td>
+                    <td>{{ empleado.sueldo}}</td>
+                    <td>
+                        {% if empleado.foto %}
+                        <img src="{{empleado.foto.url}}" alt="foto empleado"
+                        width="50" height="auto">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="{% url 'editarEmpleado' empleado.id %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'eliminarEmpleado' empleado.id %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
